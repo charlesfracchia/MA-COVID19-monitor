@@ -25,7 +25,7 @@ def get_data(debug=False):
         debug_write.close()
         print("DEBUG: Wrote HTML file of obtained page to: temp.html")
 
-    boston_block = soup.find_all("address")[1].text.replace("\xa0"," ").split("confirmed cases")
+    boston_block = soup.find_all("address")[2].text.replace("\xa0"," ").split("confirmed cases")
     confirmed_cases = int(boston_block[0].replace("Boston: ","").replace(",",""))
     recovered_cases = int(boston_block[1].split(" recovered")[0].replace("(","").replace(",",""))
     death_cases = int(boston_block[1].split(" and ")[1].replace("deaths)","").replace(",",""))
