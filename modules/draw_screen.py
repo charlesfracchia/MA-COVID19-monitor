@@ -3,6 +3,7 @@ from font_hanken_grotesk import HankenGroteskBold, HankenGroteskMedium
 from font_intuitive import Intuitive
 from PIL import Image, ImageFont, ImageDraw
 from inky import InkyPHAT
+import os
 
 scale_size = 1
 
@@ -17,17 +18,20 @@ height = inky_display.HEIGHT
 img = Image.new("P", (width, height))
 draw = ImageDraw.Draw(img)
 
+# Get current path
+current_path = os.path.dirname(__file__)
+
 # Alternatively load a TTF font.  Make sure the .ttf font file is in the same directory as the python script!
 # Some other nice fonts to try: http://www.dafont.com/bitmap.php
-science_font = ImageFont.truetype('/home/pi/macovid/resources/fonts/Science_Icons.ttf', 22)
-fat_font = ImageFont.truetype('/home/pi/macovid/resources/fonts/04b_30/04B_30__.TTF', 12)
-vcr_font = ImageFont.truetype('/home/pi/macovid/resources/fonts/vcr_osd_mono/VCR_OSD_MONO_1.001.ttf', 11)
-big_vcr_font = ImageFont.truetype('/home/pi/macovid/resources/fonts/vcr_osd_mono/VCR_OSD_MONO_1.001.ttf', 15)
+science_font = ImageFont.truetype(os.path.join(current_path, '../resources/fonts/Science_Icons.ttf'), 22)
+fat_font = ImageFont.truetype(os.path.join(current_path, '../resources/fonts/04b_30/04B_30__.TTF'), 12)
+vcr_font = ImageFont.truetype(os.path.join(current_path, '../resources/fonts/vcr_osd_mono/VCR_OSD_MONO_1.001.ttf'), 11)
+big_vcr_font = ImageFont.truetype(os.path.join(current_path, '../resources/fonts/vcr_osd_mono/VCR_OSD_MONO_1.001.ttf'), 15)
 
-#minecraft_font = ImageFont.truetype('/home/pi/macovid/resources/fonts/8bit_wonder/8-BIT WONDER.TTF', 11)
-pixelmix_font_tiny = ImageFont.truetype('/home/pi/macovid/resources/fonts/pixelmix/pixelmix.ttf', 7)
-pixelmix_font = ImageFont.truetype('/home/pi/macovid/resources/fonts/pixelmix/pixelmix.ttf', 8)
-pixelmix_font_bold = ImageFont.truetype('/home/pi/macovid/resources/fonts/pixelmix/pixelmix_bold.ttf', 10)
+#minecraft_font = ImageFont.truetype(os.path.join(current_path, '../resources/fonts/8bit_wonder/8-BIT WONDER.TTF'), 11)
+pixelmix_font_tiny = ImageFont.truetype(os.path.join(current_path, '../resources/fonts/pixelmix/pixelmix.ttf'), 7)
+pixelmix_font = ImageFont.truetype(os.path.join(current_path, '../resources/fonts/pixelmix/pixelmix.ttf'), 8)
+pixelmix_font_bold = ImageFont.truetype(os.path.join(current_path, '../resources/fonts/pixelmix/pixelmix_bold.ttf'), 10)
 
 intuitive_font = ImageFont.truetype(Intuitive, int(22 * scale_size))
 hanken_bold_font = ImageFont.truetype(HankenGroteskBold, int(35 * scale_size))
