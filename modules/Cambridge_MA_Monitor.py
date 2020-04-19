@@ -26,8 +26,8 @@ def get_data(debug=False):
         print("DEBUG: Wrote HTML file of obtained page to: temp.html")
 
     # Get confirmed and death numbers
-    confirmed = soup.find_all('p', {"class": "count"})[0].text
-    deaths = soup.find_all('p', {"class": "count"})[1].text
+    confirmed = int(soup.find_all('p', {"class": "count"})[0].text.replace(",",""))
+    deaths = int(soup.find_all('p', {"class": "count"})[1].text.replace(",",""))
 
     # Get last updated date
     last_updated = soup.find("div", {"class":"lastUpdated"}).text
