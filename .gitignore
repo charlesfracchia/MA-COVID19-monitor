@@ -134,3 +134,6 @@ dmypy.json
 # PyENV environment
 pyvenv.cfg
 bin/*
+
+# Projet specific - avoid uploading temporary debug HTML file
+temp.html
