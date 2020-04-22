@@ -135,8 +135,13 @@ def draw_footer(state_information):
     draw.rectangle((0, table_header_start_y+table_header_height+padding_y+((small_text_height+padding_y_small)*3)+padding_y_small+padding_y, width, table_header_start_y+table_header_height+padding_y+((small_text_height+padding_y_small)*3)+padding_y_small+padding_y),
                     outline=inky_display.BLACK)
 
+    #Calculate trend symbol depending on trend of Reproductive Number
+    if (state_information["delta"] > 0):
+        trend_symbol = "u"
+    else:
+        trend_symbol = "d"
     draw.text((left, height-11), 
-                state_information["two_letter"]+" | POSITIVE "+'{:,}'.format(state_information["confirmed_cases"])+" | SAFE "+'{:,}'.format(state_information["quarantine_released"]),
+                "R#: "+'{:.2f}'.format(state_information["latest_rt"]["value"])+" "+trend_symbol+" | POS "+'{:,}'.format(state_information["confirmed_cases"])+" | SAFE "+'{:,}'.format(state_information["quarantine_released"]),
                 font=pixelmix_font, fill=inky_display.WHITE)
 
 if __name__ == "__main__":

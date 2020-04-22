@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from modules import DPH_MA_Monitor, Boston_MA_Monitor, Somerville_MA_Monitor, Cambridge_MA_Monitor
+from modules import RtLive_Reproductive_Number_Monitor
 from modules import draw_screen
 from apscheduler.schedulers.blocking import BlockingScheduler
 
@@ -16,6 +17,10 @@ def update_screen():
     state_info.update(ma_data)
     if DEBUG:
         print(state_info)
+
+    # Update STATE_INFORMATION with latest Reproductive Number (Rt/R0)
+    rt_data = RtLive_Reproductive_Number_Monitor.get_rt()
+    state_info.update(rt_data)
 
     # BUILD LOCATIONS
     locations = []
