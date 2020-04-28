@@ -23,7 +23,7 @@ def get_rt():
     # Keep only the last 2 values of the R number
     last_two = []
     for idx, row in enumerate(cr):
-        if row["state"] == STATE_OF_INTEREST:
+        if row["region"] == STATE_OF_INTEREST:
             if len(last_two) < 2:
                 last_two.append(row)
             else:
@@ -31,12 +31,12 @@ def get_rt():
                 last_two.append(row)
 
     # Calculate the R number difference. Mostly interested in whether it's negative or positive
-    delta = float(truncate(float(last_two[1]["ML"]) - float(last_two[0]["ML"]), 2))
+    delta = float(truncate(float(last_two[1]["mean"]) - float(last_two[0]["mean"]), 2))
     
     data = {
         "latest_rt" : {
             "date" : datetime.strptime(last_two[1]["date"], "%Y-%m-%d"),
-            "value" : float(last_two[1]["ML"])
+            "value" : float(last_two[1]["mean"])
         },
         "delta" : delta
     }
