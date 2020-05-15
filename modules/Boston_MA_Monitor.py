@@ -25,16 +25,18 @@ def get_data(debug=False):
         debug_write.close()
         print("DEBUG: Wrote HTML file of obtained page to: temp.html")
 
-    boston_block = soup.find_all("address")[2].text.replace("\xa0"," ").split("confirmed cases")
-    confirmed_cases = int(boston_block[0].replace("Boston: ","").replace(",",""))
-    recovered_cases = int(boston_block[1].split(" recovered")[0].replace("(","").replace(",",""))
-    death_cases = int(boston_block[1].split(" and ")[1].replace("deaths)","").replace(",",""))
+    boston_block = soup.find_all("h4")[0].text.replace("\xa0"," ").split(" cases | ")
+    confirmed_cases = int(boston_block[0].replace(",",""))
+    recovered_cases = int(boston_block[1].replace(" recovered", "").replace(",",""))
+    death_cases = int(soup.find_all("h4")[1].text.replace("\xa0"," ").replace(" deaths","").replace(",",""))
 
     #Get the year from the published article's date. Let's hope this doesn't drag on into 2021...
     publish_year = int(soup.find("time").text.split(", ")[1])
-    confirmed_date = soup.find_all("em")[1].text.replace("\xa0", " ")
+    confirmed_date = soup.find_all("address")[0].text.replace("\xa0", " ")
     confirmed_date = "%s %s" % (confirmed_date, publish_year)
-    confirmed_date = datetime.strptime(confirmed_date, "Updated as of %A, %B %d %Y")
+    confirmed_date = datetime.strptime(confirmed_date, "Boston (as of %A, %B %d) %Y")
+
+    #Get the date from the da
 
     data = {
         "name" : LOCATION_NAME,
